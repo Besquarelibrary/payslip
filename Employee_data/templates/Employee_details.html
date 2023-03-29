@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Employee Details{% endblock %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+{% block body %}
+    <h2>All Employee Details</h2>
+<table  class="table table-striped">
+<thead>
+<th>Emp_ID</th>
+<th>Emp_FirstName</th>
+<th>Emp_LastName</th>
+<th>Emp_CTC</th>
+<th>Emp_Salary</th>
+</thead>
+<tbody>
+{% for rec in empdetails %}
+    <tr>
+    <td>{{ rec.Employee_ID }}</td>
+    <td>{{ rec.Employee_FirstName }}</td>
+    <td> {{ rec.Employee_LastName }}</td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

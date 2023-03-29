@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Add Expenses{% endblock %}
+{% block body %}
+    <form action="{% url 'addexpenses' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="mb-3">
+  <label for="billnumber" class="form-label">Bill Number</label>
+  <input type="text" class="form-control" id="billnumber" name="billnumber" placeholder="Enter bill number">
+</div>
+<div class="mb-3">
+  <label for="billprice" class="form-label">Bill Price</label>
+  <input type="text" class="form-control" id="billprice" name="billprice" placeholder="Enter bill price" required>
+</div>
+    <div class="mb-3">
+  <label for="billdate" class="form-label">Bill Date</label>
+  <input type="date" class="form-control" id="billdate" name="billdate" placeholder="Enter bill date" required>
+</div>
+    <div class="mb-3">
+  <label for="bill_image" class="form-label">Bill Image</label>
+  <input class="form-control" type="file" id="bill_image" name="image" alt="image uploading soon" placeholder="Upload bill image" required>
+</div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}`

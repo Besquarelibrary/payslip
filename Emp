@@ -1,0 +1,63 @@
+var variablepay= Number(document.getElementById("EmpVariablepay").value);
+            console.log(variablepay)
+            var totalearnings = basic+hra+conveyanceallowance+specialallowance+variablepay
+            console.log(totalearnings);
+            document.getElementById("EmpTotalearnings").value=totalearnings;
+            var professionaltax = 200.00
+            console.log(professionaltax)
+            document.getElementById("EmpProfessionaltax").value =professionaltax
+            var totaldeductions = professionaltax
+            document.getElementById("EmpTotaldeductions").value = totaldeductions
+            var netpayable = totalearnings-totaldeductions
+            console.log(netpayable)
+
+
+
+
+ #
+            # # Convert the worksheet to HTML
+            # html = openpyxl.writer.html.WorksheetWriter(ws).get_output()
+            #
+            # # Create a PDF file from the HTML
+            # pdf_file = HTML(string=html).write_pdf(f'{file}.pdf')
+            #
+            # # Return the PDF file as a response
+            # response = HttpResponse(pdf_file, content_type='application/pdf')
+            # response['Content-Disposition'] = f"attachment; filename=f'{file}.pdf'"
+            # return response
+        # pdf_filename = (f'{file}.pdf')
+        # pdf = canvas.Canvas(pdf_filename)
+        #
+        # # Iterate through the rows and columns of the XLSX file
+        # for row in worksheet.rows:
+        #     for cell in row:
+        #         # Get the cell value and write it to the PDF file
+        #         pdf.drawString(cell.column_letter + str(cell.row), str(cell.value), str(pdf_filename) )
+        #
+        # # Save the PDF file
+        # pdf.save()
+
+
+
+
+        EMAIL_HOST = 'smtpout.secureserver.net'
+EMAIL_HOST_USER = 'username@domain.com'
+EMAIL_HOST_PASSWORD = 'wcswqhfwsxgvniek'
+DEFAULT_FROM_EMAIL = 'username@domain.com'
+SERVER_EMAIL = 'username@domain.com'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
+SMTP_SSL = True
+
+
+
+
+Secure SSL/TLS Settings (Recommended)
+Username:	info@besquaretech.com
+Password:	Use the email account’s password.
+Incoming Server:	mail.besquaretech.com
+IMAP Port: 993 POP3 Port: 995
+Outgoing Server:	mail.besquaretech.com
+SMTP Port: 465
+IMAP, POP3, and SMTP require authentication.
+wcswqhfwsxgvniek

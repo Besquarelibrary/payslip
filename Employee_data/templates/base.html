@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%  block title %}{% endblock %}</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+{% block script %}{% endblock %}
+</head>
+<body>
+{% block body %}
+    <table class="table table-success table-striped">
+
+</table>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+    {{ msg }}
+ <form method="post" action="{% url 'getemp' %}">
+    {% csrf_token %}
+  <div class="form-group">
+    <label>Eid:</label>
+    <input type="number" class="form-control" name="eid" placeholder="Enter EmpId">
+    </div>
+
+  <button type="submit" class="btn btn-primary">showemp</button>
+</form>
+
+</body>
+
+</html>

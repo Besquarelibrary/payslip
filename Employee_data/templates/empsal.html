@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block title %}Salary Details{% endblock %}
+
+
+
+{% block body %}
+    <script type="text/javascript">
+    function mysalary() {
+        var actualworkingdays = Number(document.getElementById("EmpActualworkingdays").value);
+        var totalworkingdays = Number(document.getElementById("EmpTotalworkingdays").value);
+        if (totalworkingdays <= actualworkingdays) {
+            var lossofdays = actualworkingdays - totalworkingdays;
+            document.getElementById("EmpLossofpaydays").value = lossofdays;
+            var dayspayable = actualworkingdays - lossofdays
+            console.log(dayspayable)
+            document.getElementById("EmpDayspayable").value = dayspayable
+            var employeesalary = Number(document.getElementById("EmpSalary").value);
+            console.log(employeesalary);
+            var lossofdayssalary = lossofdays * (employeesalary / 30);
+            lossofdayssalary=parseFloat(lossofdayssalary.toFixed(2))
+            console.log(lossofdayssalary);
+            var salaryafterlossofdays = employeesalary - lossofdayssalary;
+            console.log(salaryafterlossofdays);
+            if (lossofdays <= 12) {
+                var basic = employeesalary * (50 / 100);
+                basic=parseFloat(basic.toFixed(2))
+                console.log(basic);
+                document.getElementById("EmpBasic").value = basic;
+                var salaryremaingafterbasic = salaryafterlossofdays - basic;
+                salaryremaingafterbasic=parseFloat(salaryremaingafterbasic.toFixed(2))
+                console.log(salaryremaingafterbasic);
+                var hra = salaryremaingafterbasic * (60 / 100);salaryremaingafterbasic=parseFloat(salaryremaingafterbasic.toFixed(2))
+                hra=parseFloat(hra.toFixed(2))
+                console.log(hra);
+                document.getElementById("EmpHra").value = hra;
+                var conveyanceallowance = salaryremaingafterbasic * (2 / 100);
+                conveyanceallowance=parseFloat(conveyanceallowance.toFixed(2));
+                console.log(conveyanceallowance);
+                document.getElementById("EmpConveyanceallowance").value = conveyanceallowance;
+                var specialallowance = salaryremaingafterbasic * (38 / 100);
+                specialallowance=parseFloat(specialallowance.toFixed(2))
+                console.log(specialallowance);
+                document.getElementById("EmpSpecialallowance").value = specialallowance;
+                var variablepay = Number(document.getElementById("EmpVariablepay").value);
+                variablepay=parseFloat(variablepay.toFixed(2))
+                console.log(variablepay)
+                var totalearnings = basic + hra + conveyanceallowance + specialallowance + variablepay
+                totalearnings=parseFloat(totalearnings.toFixed(2))
+                console.log(totalearnings);
+                document.getElementById("EmpTotalearnings").value = totalearnings;
+                var professionaltax = 200.00
+                console.log(professionaltax)
+                document.getElementById("EmpProfessionaltax").value = professionaltax
+                var totaldeductions = professionaltax
+                document.getElementById("EmpTotaldeductions").value = totaldeductions
+                var netpayable = totalearnings - totaldeductions
+                console.log(netpayable)
+                document.getElementById("EmpNetpayable").value = netpayable
+            } else if (lossofdays > 12) {
+                var basic_loss = salaryafterlossofdays * (50 / 100);
+                console.log(basic_loss)
+                document.getElementById("EmpBasic").value = basic_loss;
+                var salaryremaingafterbasic_loss = salaryafterlosswithprofessionaltax - basic_loss
+                var hra_loss = salaryremaingafterbasic_loss * (60 / 100);
+                console.log(hra_loss);
+                document.getElementById("EmpHra").value = hra_loss;
+                var conveyanceallowance_loss = salaryremaingafterbasic_loss * (2 / 100);
+                console.log(conveyanceallowance_loss);
+                document.getElementById("EmpConveyanceallowance").value = conveyanceallowance_loss;
+                var specialallowance_loss = salaryremaingafterbasic_loss * (38 / 100);
+                console.log(specialallowance_loss);
+                document.getElementById("EmpSpecialallowance").value = specialallowance_loss
+                var variablepay_loss = Number(document.getElementById("EmpVariablepay").value);
+                console.log(variablepay_loss)
+                var totalearnings_loss = basic_loss + hra_loss + conveyanceallowance_loss + specialallowance_loss + variablepay_loss;
+                console.log(totalearnings_loss);
+                document.getElementById("EmpTotalearnings").value = totalearnings_loss
+                var professionaltax_loss = 200.00
+                console.log(professionaltax)
+                document.getElementById("EmpProfessionaltax").value = professionaltax_loss
+                var totaldeductions_loss = professionaltax_loss
+                document.getElementById("EmpTotaldeductions").value = totaldeductions_loss
+                var netpayable_loss = totalearnings_loss - totaldeductions_loss
+                netpayable_loss=parseFloat(netpayable_loss.toFixed(2))
+                console.log(netpayable)
+            }
+        }
+        else if (totalworkingdays>actualworkingdays){
+            alert("please enter valid total working days")
+        }
+    }
+</script>
+    <div class="container">
+<form class="row g-3 mt-1" method="post" action="{% url "salary" %}">
+    {% csrf_token %}
+
+  <div class="col-md-2">
+    <label for="EmpId" class="form-label">Employee ID</label>
+    <input type="text" class="form-control" id="EmpID" name="EmpID" value="{{ employeeRecord.Employee_ID }}" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="EmpFirstname" class="form-label">First Name</label>
+    <input type="text" class="form-control" id="EmpFirstname" name="EmpFirstname" value="{{ employeeRecord.Employee_FirstName }}" readonly>
+  </div>
+ <div class="col-md-2">
+    <label for="EmpMiddlename" class="form-label">Middle Name</label>
+    <input type="text" class="form-control" id="EmpMiddlename" name="EmpMiddlename" value="{{ employeeRecord.Employee_MiddleName }}" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="EmpLastname" class="form-label">Last Name</label>
+    <input type="text" class="form-control" id="EmpLastname" name="EmpLastname" value="{{ employeeRecord.Employee_LastName }}" readonly>
+  </div>
+ <div class="col-md-2">
+    <label for="EmpDepartment" class="form-label">Department</label>
+    <input type="text" class="form-control" id="EmpDepartment" name="EmpDepartment" value="{{ employeeRecord.Employee_Department }}" readonly>
+  </div>
+ <div class="col-md-2">
+    <label for="EmpDesignation" class="form-label">Designation</label>
+    <input type="text" class="form-control" id="EmpDesignation" name="EmpDesignation" value="{{ employeeRecord.Employee_Designation }}" readonly>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpDateofjoined" class="form-label">Date Of Joined</label>
+    <input type="text" class="form-control" id="EmpDateofjoined" name="EmpDateofjoined" value="{{ dateofjoined }}" readonly>
+  </div>
+ <div class="col-md-2">
+    <label for="EmpBankname" class="form-label">Bank Name</label>
+    <input type="text" class="form-control" id="EmpBankname" name="EmpBankname" value="{{ employeeRecord.Employee_Bank_Name }}" readonly>
+  </div>
+ <div class="col-md-2">
+    <label for="EmpBankaccountnumber" class="form-label">Account Number</label>
+    <input type="number" class="form-control" id="EmpBankaccountnumber" name="EmpBankaccountnumber" value="{{ employeeRecord.Employee_Bank_Account_Number }}" readonly>
+  </div>
+<div class="col-md-2">
+    <label for="EmpIfsccode" class="form-label">IFSC Code</label>
+    <input type="text" class="form-control" id="EmpIfsccode" name="EmpIfsccode" value="{{ employeeRecord.Employee_Bank_IFSC_Code }}" readonly>
+  </div>
+   <div class="col-md-2">
+    <label for="EmpPannumber" class="form-label">Pan Number</label>
+    <input type="text" class="form-control" id="EmpPannumber" name="EmpPannumber" value="{{ employeeRecord.Employee_Pan_Number }}" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="EmpUannumber" class="form-label">UAN Number</label>
+    <input type="number" class="form-control" id="EmpUannumber" name="EmpUannumber" value="-" readonly>
+  </div>
+
+    <div class="col-md-2">
+    <label for="EmpPfnumber" class="form-label">PF Number</label>
+    <input type="text" class="form-control" id="EmpPfnumber" name="EmpPfnumber" value="-" readonly>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpEsinumber" class="form-label">ESI Number</label>
+    <input type="text" class="form-control" id="EmpEsinumber" name="EmpEsinumber" value="-" readonly>
+  </div>
+     <div class="col-md-2">
+    <label for="EmpSalary" class="form-label">Salary</label>
+    <input type="number" class="form-control" id="EmpSalary" name="EmpSalary" value="{{ employeeRecord.Employee_Salary }}" readonly>
+  </div>
+    <hr>
+    <div class="col-md-2">
+    <label for="EmpActualworkingdays" class="form-label">Actual Working Days</label>
+    <input type="text" class="form-control" id="EmpActualworkingdays" name="EmpActualworkingdays" value="{{ actualdays }}" readonly>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpTotalworkingdays" class="form-label">Total Working Days</label>
+    <input type="text" class="form-control"  id="EmpTotalworkingdays" name="EmpTotalworkingdays">
+  </div>
+    <div class="col-md-2">
+    <label for="EmpLossofpaydays" class="form-label">Loss Of Pay Days</label>
+    <input type="text" class="form-control" id="EmpLossofpaydays" name="EmpLossofpaydays" readonly>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpPaidleaves" class="form-label">Paid Leaves</label>
+    <input type="text" class="form-control" id="EmpPaidleaves" name="EmpPaidleaves" required>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpDayspayable" class="form-label">Days Payable</label>
+    <input type="text" class="form-control" id="EmpDayspayable" name="EmpDayspayable" readonly>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpBasic" class="form-label">Basic</label>
+    <input type="text" class="form-control" id="EmpBasic" name="EmpBasic" readonly>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpConveyanceallowance" class="form-label">Conveyance Allowance</label>
+    <input type="text" class="form-control" id="EmpConveyanceallowance" name="EmpConveyanceallowance" value="0" readonly>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpHra" class="form-label">HRA</label>
+    <input type="text" class="form-control" id="EmpHra" name="EmpHra" value="0" readonly>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpMedicalallowance" class="form-label">Medical Allowance</label>
+    <input type="text" class="form-control" id="EmpMedicalallowance" name="EmpMedicalallowance" value="0" readonly>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpSpecialallowance" class="form-label">Special Allowance</label>
+    <input type="text" class="form-control" id="EmpSpecialallowance" name="EmpSpecialallowance" value="0" readonly>
+  </div>
+    <div class="col-md-2">
+    <label for="EmpVariablepay" class="form-label">Variable Pay</label>
+    <input type="text" class="form-control" id="EmpVariablepay" name="EmpVariablepay" required oninput="mysalary()">
+  </div>
+        <div class="col-md-2">
+    <label for="EmpTotalearnings" class="form-label">Total Earnings</label>
+    <input type="text" class="form-control" id="EmpTotalearnings" name="EmpTotalearnings" value="0" readonly>
+  </div>
+        <div class="col-md-2">
+    <label for="EmpPfemployee" class="form-label">PF Employee</label>
+    <input type="text" class="form-control" id="EmpPfemployee" name="EmpPfemployee" value="-" readonly>
+  </div>
+        <div class="col-md-2">
+    <label for="EmpPfemployer" class="form-label">PF Employer</label>
+    <input type="text" class="form-control" id="EmpPfemployer" name="EmpPfemployer" value="-" readonly>
+  </div>
+        <div class="col-md-2">
+    <label for="EmpEsiemployee" class="form-label">ESI Employee</label>
+    <input type="text" class="form-control" id="EmpEsiemployee" name="EmpEsiemployee" value="-" readonly>
+  </div>
+        <div class="col-md-2">
+    <label for="EmpEsiemployer" class="form-label">ESI Employer</label>
+    <input type="text" class="form-control" id="EmpEsiemployer" name="EmpEsiemployer" value="-" readonly>
+  </div>
+<div class="col-md-2">
+    <label for="EmpTotalcontributions" class="form-label">Total Contributions</label>
+    <input type="text" class="form-control" id="EmpTotalcontributions" name="EmpTotalcontributions" value="-" readonly>
+  </div>
+<div class="col-md-2">
+    <label for="EmpProfessionaltax" class="form-label">Professional Tax</label>
+    <input type="text" class="form-control" id="EmpProfessionaltax" name="EmpProfessionaltax" value="0" readonly>
+  </div>
+<div class="col-md-2">
+    <label for="EmpTotaldeductions" class="form-label">Total Deductions</label>
+    <input type="text" class="form-control" id="EmpTotaldeductions" name="EmpTotaldeductions" value="0" readonly>
+  </div>
+<div class="col-md-2">
+    <label for="EmpNetpayable" class="form-label">Net Payable</label>
+    <input type="number" class="form-control" id="EmpNetpayable" name="EmpNetpayable" readonly>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+    </div>
+
+{% endblock %}

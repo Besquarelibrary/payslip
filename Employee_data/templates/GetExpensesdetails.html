@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}All Expenses Details{% endblock %}
+{% block body %}
+<h2>All Employee Details</h2>
+<table  class="table table-striped">
+<thead>
+<th>Sr_No</th>
+<th>Bill Date</th>
+<th>Bill Number</th>
+<th>Bill Price</th>
+<th>Bill Image</th>
+</thead>
+<tbody>
+{% for rec in allexpensesdetails %}
+    <tr>
+    <td>{{ rec.SrNo}}</td>
+    <td>{{ rec.Date}}</td>
+    <td>{{ rec.billNo }}</td>
+    <td> {{ rec.price }}</td>
+        <td> <img src="{{ rec.bill_image.url }}" style="max-height: 50px"><button><a href="{{ rec.bill_image.url }}" target="_blank">View</a></button><button><a href="{{ rec.bill_image.url }}" download>Download</a> </button></td>
+    </tr>
+{#    <td><img src="path/to/image2.jpg" alt="Image 2"></td>#}
+{#			<td><a href="path/to/image2.jpg" target="_blank">View</a></td>#}
+{#			<td><a href="path/to/image2.jpg" download>Download</a></td>#}
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
