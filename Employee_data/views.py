@@ -205,9 +205,9 @@ class my_view(View):
                 Workbooks.ActiveSheet.ExportAsFixedFormat(0, PATH_TO_PDF)
                 Workbooks.Close(False)
                 excel.Quit()
-            finally:
-                print('Succeeded.')
-                os.remove(WB_PATH)
+            # finally:
+            #     print('Succeeded.')
+            #     os.remove(WB_PATH)
 
 
 # def salaryslipsent(request):
