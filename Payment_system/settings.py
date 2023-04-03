@@ -139,7 +139,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'besquaretech@gmail.com'
+EMAIL_HOST_USER = 'hnaitanwar'
 EMAIL_HOST_PASSWORD = 'fvopkdgywipjbphl'
 EMAIL_PORT = '587'
 
